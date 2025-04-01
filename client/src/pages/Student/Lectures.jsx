@@ -16,7 +16,7 @@ const MySessions = () => {
     const fetchStudentSessions = async () => {
       try {
         const response = await axios.get(
-          "https://sky-wings-server.vercel.app/users/student/my-sessions",
+          "https://sky-wings-server.vercel.app/api/users/student/my-sessions",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

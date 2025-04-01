@@ -119,7 +119,7 @@ const RegisterPage = () => {
       }
 
       const response = await axios.post(
-        "https://sky-wings-server.vercel.app/users/register",
+        "https://sky-wings-server.vercel.app/api/users/register",
         formDataToSend,
         {
           headers: {

@@ -27,7 +27,7 @@ const PaymentSuccessPage = () => {
           }
 
           const response = await axios.post(
-            "https://sky-wings-server.vercel.app/course/payment-success",
+            "https://sky-wings-server.vercel.app/api/course/payment-success",
             { session_id: sessionId },
             {
               headers: {

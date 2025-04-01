@@ -13,7 +13,7 @@ const Profile = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://sky-wings-server.vercel.app/users/profile",
+          "https://sky-wings-server.vercel.app/api/users/profile",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -46,7 +46,7 @@ const Profile = () => {
       }
 
       const response = await axios.put(
-        "https://sky-wings-server.vercel.app/users/profile",
+        "https://sky-wings-server.vercel.app/api/users/profile",
         formData,
         {
           headers: {

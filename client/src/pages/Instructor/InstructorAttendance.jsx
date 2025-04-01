@@ -16,7 +16,7 @@ const InstructorAttendance = () => {
   const [filter, setFilter] = useState("all"); // Filter for attendance
 
   const authToken = localStorage.getItem("token");
-  const API_BASE_URL = "https://sky-wings-server.vercel.app/instructor/";
+  const API_BASE_URL = "https://sky-wings-server.vercel.app/api/instructor/";
 
   useEffect(() => {
     fetchCourses();

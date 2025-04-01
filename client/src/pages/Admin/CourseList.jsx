@@ -27,7 +27,7 @@ const CourseList = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          "https://sky-wings-server.vercel.app/admin/courses",
+          "https://sky-wings-server.vercel.app/api/admin/courses",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ const CourseList = () => {
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
-          "https://sky-wings-server.vercel.app/admin/instructors",
+          "https://sky-wings-server.vercel.app/api/admin/instructors",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -87,7 +87,7 @@ const CourseList = () => {
       });
 
       const response = await axios.post(
-        "https://sky-wings-server.vercel.app/admin/courses",
+        "https://sky-wings-server.vercel.app/api/admin/courses",
         formDataToSend,
         {
           headers: {
@@ -122,7 +122,7 @@ const CourseList = () => {
   const handleViewEnrolled = async (courseId) => {
     try {
       const response = await axios.get(
-        `https://sky-wings-server.vercel.app/admin/courses/${courseId}/enrolled`,
+        `https://sky-wings-server.vercel.app/api/admin/courses/${courseId}/enrolled`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -141,7 +141,7 @@ const CourseList = () => {
     if (window.confirm("Are you sure you want to delete this course?")) {
       try {
         await axios.delete(
-          `https://sky-wings-server.vercel.app/admin/courses/${courseId}`,
+          `https://sky-wings-server.vercel.app/api/admin/courses/${courseId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

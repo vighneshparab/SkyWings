@@ -16,7 +16,7 @@ const LandingPage = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("https://sky-wings-server.vercel.app/course"); // Replace with actual API endpoint
+        const response = await axios.get("https://sky-wings-server.vercel.app/api/course"); // Replace with actual API endpoint
         setCourses(response.data);
       } catch (error) {
         setError("Failed to fetch courses. Please try again later.");

@@ -9,7 +9,7 @@ const PaymentList = () => {
     const fetchPayments = async () => {
       try {
         const response = await axios.get(
-          "https://sky-wings-server.vercel.app/admin/payments",
+          "https://sky-wings-server.vercel.app/api/admin/payments",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

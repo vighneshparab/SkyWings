@@ -15,7 +15,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        "https://sky-wings-server.vercel.app/users/login",
+        "https://sky-wings-server.vercel.app/api/users/login",
         {
           email,
           password,

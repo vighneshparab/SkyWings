@@ -17,7 +17,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const usersResponse = await axios.get(
-          "https://sky-wings-server.vercel.app/admin/users",
+          "https://sky-wings-server.vercel.app/api/admin/users",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         setUsers(usersResponse.data);
 
         const coursesResponse = await axios.get(
-          "https://sky-wings-server.vercel.app/admin/courses",
+          "https://sky-wings-server.vercel.app/api/admin/courses",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
