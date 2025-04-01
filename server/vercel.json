@@ -9,10 +9,17 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "server.js",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "MONGODB_URI": "mongodb+srv://vighneshparab83:WWzQ2mQtX52z56wt@skywings.kpjamzc.mongodb.net/?retryWrites=true&w=majority&appName=SkyWings",
+    "JWT_SECRET": "skywings@2004",
+    "STRIPE_SECRET_KEY": "sk_test_51QhsHkBBd5siMmWjEaOkgB23mfV2B1VJXYmGYtLAVlJmqvKfRinICFM5s08hopY7nfY7xmiOnTd0B1KpoMWieQhW00M5WCKwX5",
+    "EMAIL_USER": "vighneshparab83@gmail.com",
+    "EMAIL_PASS": "cecb auqy dkib gyiy",
+    "CLIENT_URL": "https://sky-wings-app.vercel.app"
   }
 }
