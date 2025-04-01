@@ -22,9 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
-const allowedOrigins = [
-  "https://sky-wings-app.vercel.app"
-];
+const allowedOrigins = ["https://sky-wings-app.vercel.app"];
 
 app.use(
   cors({
@@ -32,7 +30,10 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("CORS policy does not allow access from this origin"), false);
+        callback(
+          new Error("CORS policy does not allow access from this origin"),
+          false
+        );
       }
     },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
