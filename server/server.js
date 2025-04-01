@@ -61,6 +61,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/instructor", instructorRoutes);
+app.get("/test", (req, res) => {
+  res.json({ message: "Test route is working!" });
+});
+
 
 app.get("/", (req, res) => {
   res.send("SkyWings Backend is running!");
