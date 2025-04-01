@@ -1,0 +1,49 @@
+@keyframes clouds {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.animate-clouds {
+    animation: clouds 60s linear infinite;
+}
+
+@keyframes plane {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-55%, -55%) rotate(5deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
+.animate-plane {
+    animation: plane 5s ease-in-out infinite;
+}
+
+@keyframes star {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.2);
+    }
+}
+
+.animate-star {
+    animation: star 3s ease-in-out infinite alternate;
+}
