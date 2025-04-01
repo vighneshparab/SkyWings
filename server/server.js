@@ -37,7 +37,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // Local development frontend URL
-      "https://sky-wings-app-git-main-vighneshparab83-gmailcoms-projects.vercel.app", // Deployed frontend URL
+      "https://sky-wings-app.vercel.app/", // Deployed frontend URL
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
