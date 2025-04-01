@@ -1,11 +1,12 @@
-import { HashRouter as Router } from "react-router-dom";
-import AppRoutes from "./routes/Routes";
-
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes/routes.jsx";
 function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </>
   );
 }
 
