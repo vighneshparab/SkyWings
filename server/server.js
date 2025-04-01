@@ -66,3 +66,5 @@ app.use("/api/instructor", instructorRoutes);
 app.get("/", (req, res) => {
   res.send("SkyWings Backend is running!");
 });
+
+module.exports = app;
