@@ -9,7 +9,7 @@ const ResourceLibrary = ({ courseId }) => {
     const fetchResources = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/course/${courseId}/resources`,
+          `https://sky-wings-server.vercel.app/course/${courseId}/resources`,
           {
             method: "GET",
             headers: {

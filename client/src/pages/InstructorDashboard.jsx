@@ -24,7 +24,7 @@ const InstructorDashboard = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/instructor/courses",
+          "https://sky-wings-server.vercel.app/instructor/courses",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -43,7 +43,7 @@ const InstructorDashboard = () => {
   const fetchSessions = async (courseId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/instructor/courses/${courseId}/sessions`,
+        `https://sky-wings-server.vercel.app/instructor/courses/${courseId}/sessions`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -60,7 +60,7 @@ const InstructorDashboard = () => {
   const fetchAttendance = async (sessionId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/instructor/sessions/${sessionId}/attendance`,
+        `https://sky-wings-server.vercel.app/instructor/sessions/${sessionId}/attendance`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -77,7 +77,7 @@ const InstructorDashboard = () => {
   const fetchExams = async (courseId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/instructor/courses/${courseId}/exams`,
+        `https://sky-wings-server.vercel.app/instructor/courses/${courseId}/exams`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -94,7 +94,7 @@ const InstructorDashboard = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/instructor/certificates",
+        "https://sky-wings-server.vercel.app/instructor/certificates",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

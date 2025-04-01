@@ -12,7 +12,7 @@ const Certificates = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/course/certificates",
+          "https://sky-wings-server.vercel.app/course/certificates",
           {
             headers: { Authorization: `Bearer ${token}` },
           }

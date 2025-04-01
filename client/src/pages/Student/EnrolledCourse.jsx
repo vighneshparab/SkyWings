@@ -12,7 +12,7 @@ const EnrolledCourse = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/course/enrolled",
+          "https://sky-wings-server.vercel.app/course/enrolled",
           {
             headers: { Authorization: `Bearer ${token}` },
           }

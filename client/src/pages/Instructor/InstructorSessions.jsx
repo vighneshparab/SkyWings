@@ -22,7 +22,7 @@ const InstructorSessions = () => {
   });
 
   const authToken = localStorage.getItem("token");
-  const API_BASE_URL = "http://localhost:5000/api/instructor/";
+  const API_BASE_URL = "https://sky-wings-server.vercel.app/instructor/";
 
   useEffect(() => {
     fetchCourses();

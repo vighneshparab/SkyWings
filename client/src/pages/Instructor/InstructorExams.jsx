@@ -28,9 +28,9 @@ function InstructorExams() {
   });
 
   // API endpoints
-  const apiUrl = "http://localhost:5000/api/instructor/courses/exams";
-  const coursesUrl = "http://localhost:5000/api/instructor/courses";
-  const studentsUrl = "http://localhost:5000/api/instructor/students";
+  const apiUrl = "https://sky-wings-server.vercel.app/instructor/courses/exams";
+  const coursesUrl = "https://sky-wings-server.vercel.app/instructor/courses";
+  const studentsUrl = "https://sky-wings-server.vercel.app/instructor/students";
 
   // Helper function to get auth token
   const getAuthToken = () => {
@@ -180,7 +180,7 @@ function InstructorExams() {
 
       if (selectedExamId) {
         await axios.put(
-          `http://localhost:5000/api/instructor/exams/${selectedExamId}`,
+          `https://sky-wings-server.vercel.app/instructor/exams/${selectedExamId}`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -212,7 +212,7 @@ function InstructorExams() {
     setError(null);
     try {
       const token = getAuthToken();
-      await axios.delete(`http://localhost:5000/api/instructor/exams/${id}`, {
+      await axios.delete(`https://sky-wings-server.vercel.app/instructor/exams/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccess("Exam deleted successfully");
@@ -241,7 +241,7 @@ function InstructorExams() {
       };
 
       const response = await axios.put(
-        `http://localhost:5000/api/instructor/exams/${examId}/grade`,
+        `https://sky-wings-server.vercel.app/instructor/exams/${examId}/grade`,
         payload,
         {
           headers: { Authorization: `Bearer ${token}` },

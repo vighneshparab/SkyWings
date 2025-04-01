@@ -23,7 +23,7 @@ const FeedBack = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/course/feedback",
+          "https://sky-wings-server.vercel.app/course/feedback",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -45,7 +45,7 @@ const FeedBack = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/course/enrolled",
+          "https://sky-wings-server.vercel.app/course/enrolled",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -96,7 +96,7 @@ const FeedBack = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:5000/api/course/feedback",
+        "https://sky-wings-server.vercel.app/course/feedback",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

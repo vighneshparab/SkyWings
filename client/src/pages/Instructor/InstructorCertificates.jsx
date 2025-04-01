@@ -19,7 +19,7 @@ function InstructorCertificates() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/instructor/courses",
+        "https://sky-wings-server.vercel.app/instructor/courses",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -35,7 +35,7 @@ function InstructorCertificates() {
     setSelectedCourse(courseId);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/instructor/students/${courseId}`,
+        `https://sky-wings-server.vercel.app/instructor/students/${courseId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -51,7 +51,7 @@ function InstructorCertificates() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/instructor/certificates",
+        "https://sky-wings-server.vercel.app/instructor/certificates",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -73,7 +73,7 @@ function InstructorCertificates() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/instructor/certificates",
+        "https://sky-wings-server.vercel.app/instructor/certificates",
         {
           student: selectedStudent,
           course: selectedCourse,
@@ -105,7 +105,7 @@ function InstructorCertificates() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/instructor/certificates/${id}`,
+        `https://sky-wings-server.vercel.app/instructor/certificates/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

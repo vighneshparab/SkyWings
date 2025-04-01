@@ -22,7 +22,7 @@ const UserList = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/users",
+          "https://sky-wings-server.vercel.app/admin/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ const UserList = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/admin/instructors",
+        "https://sky-wings-server.vercel.app/users/admin/instructors",
         formData,
         {
           headers: {

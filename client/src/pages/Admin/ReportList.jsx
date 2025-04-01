@@ -9,7 +9,7 @@ const ReportList = () => {
     const fetchReport = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/reports",
+          "https://sky-wings-server.vercel.app/admin/reports",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

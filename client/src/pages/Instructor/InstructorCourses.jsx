@@ -21,7 +21,7 @@ function InstructorCourses() {
         }
 
         const response = await axios.get(
-          "http://localhost:5000/api/instructor/courses",
+          "https://sky-wings-server.vercel.app/instructor/courses",
           {
             headers: {
               Authorization: `Bearer ${token}`, // Send token in Authorization header
@@ -59,7 +59,7 @@ function InstructorCourses() {
       }
 
       const response = await axios.get(
-        `http://localhost:5000/api/instructor/courses/${courseId}/sessions`,
+        `https://sky-wings-server.vercel.app/instructor/courses/${courseId}/sessions`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

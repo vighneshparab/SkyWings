@@ -10,7 +10,7 @@ const Exams = () => {
     const fetchExams = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/users/student/exams",
+          "https://sky-wings-server.vercel.app/users/student/exams",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

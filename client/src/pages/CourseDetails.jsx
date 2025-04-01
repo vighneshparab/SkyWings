@@ -15,7 +15,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/course/${id}`)
+      .get(`https://sky-wings-server.vercel.app/course/${id}`)
       .then((response) => {
         setCourse(response.data);
         setLoading(false);
@@ -26,7 +26,7 @@ const CourseDetails = () => {
       });
 
     axios
-      .get("http://localhost:5000/api/course")
+      .get("https://sky-wings-server.vercel.app/course")
       .then((response) => {
         setCourses(response.data);
       })
