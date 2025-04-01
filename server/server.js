@@ -19,31 +19,30 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Static file serving for uploads
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "uploads"), {
     setHeaders: (res, path, stat) => {
-      res.set("Access-Control-Allow-Origin", "*"); // Allow all origins
+      res.set("Access-Control-Allow-Origin", "*"); // Allow all origins for static files
       res.set("Access-Control-Allow-Methods", "GET");
       res.set("Access-Control-Allow-Headers", "Content-Type");
     },
   })
 );
+
 // CORS Configuration
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests from this origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: [
+      "http://localhost:5173", // Local development frontend URL
+      "https://sky-wings-app-git-main-vighneshparab83-gmailcoms-projects.vercel.app", // Deployed frontend URL
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   })
 );
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Adjust as needed
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
 
 // MongoDB Connection
 mongoose
