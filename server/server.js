@@ -69,22 +69,18 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://vighneshparab83:Vsp1234@skywings.kpjamzc.mongodb.net/?retryWrites=true&w=majority&appName=SkyWings";
-
+const MONGO_URI = process.env.MONGO_URI;
 if (!MONGO_URI) {
   console.error("❌ MONGO_URI is missing. Check your environment variables.");
   process.exit(1);
 }
 
-
-// MongoDB Connection (Improved for Vercel)
 mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 10000, // Prevents hanging connections
-    socketTimeoutMS: 45000, // Timeout for idle connections
-    keepAlive: true, // Prevents disconnections due to inactivity
+    serverSelectionTimeoutMS: 10000,
+    socketTimeoutMS: 45000,
   })
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => {
