@@ -69,6 +69,14 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://vighneshparab83:Vsp1234@skywings.kpjamzc.mongodb.net/?retryWrites=true&w=majority&appName=SkyWings";
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is missing. Check your environment variables.");
+  process.exit(1);
+}
+
+
 // MongoDB Connection (Improved for Vercel)
 mongoose
   .connect(process.env.MONGO_URI, {
