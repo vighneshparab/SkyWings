@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
+const multer = require("multer");
+const { v2: cloudinary } = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -23,7 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
 const allowedOrigins = ["https://sky-wings-app.vercel.app"];
-
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -42,11 +44,27 @@ app.use(
   })
 );
 
-// Handle preflight requests (important for CORS with credentials)
+// Handle preflight requests
 app.options("*", cors());
 
-// Static file serving for uploads
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Multer Cloudinary Storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "skywings/uploads", // Your Cloudinary folder
+    format: async (req, file) => "png", // Convert all uploads to PNG
+    public_id: (req, file) => file.originalname.split(".")[0], // Keep original filename
+  },
+});
+
+const upload = multer({ storage });
 
 // MongoDB Connection
 mongoose
@@ -63,6 +81,15 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/instructor", instructorRoutes);
 
+// File Upload Route (Example)
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+  res.json({ url: req.file.path, public_id: req.file.filename });
+});
+
+// Test Routes
 app.get("/test", (req, res) => {
   res.json({ message: "Test route is working!" });
 });
