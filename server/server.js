@@ -4,7 +4,6 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const path = require("path");
 const multer = require("multer");
 const { v2: cloudinary } = require("cloudinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
@@ -25,17 +24,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
-const allowedOrigins = ["https://sky-wings-app.vercel.app"];
+const allowedOrigins = [process.env.CLIENT_URL];
 app.use(
   cors({
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(
-          new Error("CORS policy does not allow access from this origin"),
-          false
-        );
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
       }
     },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -45,7 +42,13 @@ app.use(
 );
 
 // Handle preflight requests
-app.options("*", cors());
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.sendStatus(204);
+});
 
 // Cloudinary Configuration
 cloudinary.config({
@@ -58,9 +61,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "skywings/uploads", // Your Cloudinary folder
-    format: async (req, file) => "png", // Convert all uploads to PNG
-    public_id: (req, file) => file.originalname.split(".")[0], // Keep original filename
+    folder: "skywings/uploads",
+    format: async () => "png",
+    public_id: (req, file) => file.originalname.split(".")[0],
   },
 });
 
@@ -81,7 +84,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/instructor", instructorRoutes);
 
-// File Upload Route (Example)
+// File Upload Route
 app.post("/api/upload", upload.single("file"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
