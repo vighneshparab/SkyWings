@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 const allowedOrigins = [process.env.CLIENT_URL];
 app.use(
   cors({
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -35,13 +35,13 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Handle Preflight Requests
+// Handle preflight requests
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -69,12 +69,14 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-// MongoDB Connection
+// MongoDB Connection (Improved for Vercel)
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 10000,
+    serverSelectionTimeoutMS: 10000, // Prevents hanging connections
+    socketTimeoutMS: 45000, // Timeout for idle connections
+    keepAlive: true, // Prevents disconnections due to inactivity
   })
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => {
@@ -111,4 +113,5 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
+// Export Express App (For Vercel)
 module.exports = app;
