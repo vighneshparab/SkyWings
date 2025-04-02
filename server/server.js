@@ -79,7 +79,7 @@ if (!MONGO_URI) {
 
 // MongoDB Connection (Improved for Vercel)
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 10000, // Prevents hanging connections
