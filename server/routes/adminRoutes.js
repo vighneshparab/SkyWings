@@ -142,7 +142,6 @@ router.post("/courses", upload.single("image"), async (req, res) => {
       courseType,
     } = req.body;
 
-    // Required Fields Validation
     if (
       !title ||
       !description ||
@@ -159,66 +158,35 @@ router.post("/courses", upload.single("image"), async (req, res) => {
         .json({ message: "All required fields must be provided." });
     }
 
-    // ✅ Ensure `instructors` is an array & Convert to ObjectId
-    if (!Array.isArray(instructors) || instructors.length === 0) {
-      return res
-        .status(400)
-        .json({ message: "At least one instructor ID is required." });
-    }
-
-    const instructorIds = instructors.map(
-      (id) => new mongoose.Types.ObjectId(id)
-    );
-
-    // ✅ Fetch and validate instructors
-    const instructorUsers = await User.find({
-      _id: { $in: instructorIds },
-      role: "instructor",
-    }).lean();
-
-    if (instructorUsers.length !== instructorIds.length) {
-      return res.status(400).json({
-        message:
-          "Some instructor IDs are invalid or do not have the instructor role.",
-      });
-    }
-
-    // ✅ Validate Image Upload
     if (!req.file) {
       return res.status(400).json({ message: "Course image is required." });
     }
 
-    // ✅ Convert `schedule` to a Date object
-    const parsedSchedule = new Date(schedule);
-    if (isNaN(parsedSchedule.getTime())) {
-      return res.status(400).json({ message: "Invalid schedule date format." });
-    }
+    // ✅ Use Cloudinary's `secure_url`
+    const imageUrl = req.file.path;
 
-    // ✅ Create and Save Course
+    // ✅ Save Course with Full Image URL
     const course = new Course({
       title: title.trim(),
       description: description.trim(),
-      instructors: instructorIds, // Store ObjectId references
-      schedule: parsedSchedule,
+      instructors,
+      schedule: new Date(schedule),
       fees,
       maxParticipants,
       category: category.trim(),
       prerequisites: Array.isArray(prerequisites)
         ? prerequisites.map((p) => p.trim())
         : [],
-      courseLevel, // Added new field
-      courseDuration, // Added new field
-      courseType, // Added new field
-      image: req.file.filename, // Save image filename
+      courseLevel,
+      courseDuration,
+      courseType,
+      image: imageUrl, // ✅ Store Full URL from Cloudinary
     });
 
     await course.save();
     res.status(201).json({ message: "Course created successfully", course });
   } catch (error) {
-    console.error("Error creating course:", error);
-    res
-      .status(500)
-      .json({ message: "Internal server error", error: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -279,7 +247,7 @@ router.put("/courses/:id", upload.single("image"), async (req, res) => {
 
     // ✅ Update Image if provided
     if (req.file) {
-      updates.image = req.file.filename;
+      updates.image = req.file.path;
     }
 
     // ✅ Convert `schedule` to Date if provided
