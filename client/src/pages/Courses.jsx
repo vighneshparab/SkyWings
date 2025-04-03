@@ -26,20 +26,20 @@ const Courses = () => {
   return (
     <>
       <Navbar />
-      <section className="py-16 bg-gray-50 px-4">
+      <section className="py-8 sm:py-12 md:py-16 bg-gray-50 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 sm:mb-10 text-center">
             Explore Our Courses
           </h2>
 
           {/* Loading Skeleton */}
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {[...Array(3)].map((_, index) => (
                 <div
                   key={index}
-                  className="p-6 bg-white rounded-lg shadow-lg animate-pulse"
+                  className="p-4 sm:p-6 bg-white rounded-lg shadow-lg animate-pulse"
                 >
                   <div className="h-40 bg-gray-300 rounded mb-4"></div>
                   <div className="h-6 bg-gray-300 rounded mb-2"></div>
@@ -52,24 +52,26 @@ const Courses = () => {
           ) : error ? (
             <p className="text-red-600 text-center text-lg">{error}</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {courses.map((course) => (
                 <div
                   key={course._id}
-                  className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300"
+                  className="flex flex-col p-4 sm:p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300"
                 >
-                  <img
-                    className="w-full h-48 object-cover md:w-64 md:h-full"
-                    src={
-                      course.image
-                        ? course.image
-                        : "/uploads/default-course.jpg"
-                    }
-                    alt="Course Image"
-                  />
+                  <div className="w-full mb-4">
+                    <img
+                      className="w-full h-40 sm:h-48 md:h-52 object-cover rounded-md"
+                      src={
+                        course.image
+                          ? course.image
+                          : "/uploads/default-course.jpg"
+                      }
+                      alt={`${course.title} course`}
+                    />
+                  </div>
 
                   {/* Course Title */}
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
                     {course.title}
                   </h3>
 
@@ -81,17 +83,27 @@ const Courses = () => {
                   </p>
 
                   {/* Course Details */}
-                  <div className="text-gray-500 text-sm space-y-1 mb-3">
+                  <div className="text-gray-500 text-xs sm:text-sm space-y-1 mb-3">
                     <p>
                       <strong>Category:</strong> {course.category}
                     </p>
-                    <p>
-                      <strong>Level:</strong> {course.courseLevel} |{" "}
-                      <strong>Duration:</strong> {course.courseDuration}
+                    <p className="flex flex-wrap">
+                      <span className="mr-1">
+                        <strong>Level:</strong> {course.courseLevel}
+                      </span>
+                      <span className="mr-1">|</span>
+                      <span>
+                        <strong>Duration:</strong> {course.courseDuration}
+                      </span>
                     </p>
-                    <p>
-                      <strong>Type:</strong> {course.courseType} |{" "}
-                      <strong>Fees:</strong> ₹{course.fees}
+                    <p className="flex flex-wrap">
+                      <span className="mr-1">
+                        <strong>Type:</strong> {course.courseType}
+                      </span>
+                      <span className="mr-1">|</span>
+                      <span>
+                        <strong>Fees:</strong> ₹{course.fees}
+                      </span>
                     </p>
                     <p>
                       <strong>Schedule:</strong>{" "}
@@ -103,13 +115,15 @@ const Courses = () => {
                     </p>
                   </div>
 
-                  {/* CTA Button */}
-                  <button
-                    onClick={() => navigate(`/course/${course._id}`)}
-                    className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold text-lg hover:bg-blue-600 transition duration-300"
-                  >
-                    Explore Course
-                  </button>
+                  {/* CTA Button - Push to bottom with flex grow */}
+                  <div className="mt-auto">
+                    <button
+                      onClick={() => navigate(`/course/${course._id}`)}
+                      className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold text-base sm:text-lg hover:bg-blue-600 transition duration-300"
+                    >
+                      Explore Course
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
