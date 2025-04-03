@@ -8,6 +8,7 @@ import InstructorAttendance from "./Instructor/InstructorAttendance";
 import InstructorExams from "./Instructor/InstructorExams";
 import InstructorCertificates from "./Instructor/InstructorCertificates";
 import InstructorSessions from "./Instructor/InstructorSessions";
+import InstructorResources from "./Instructor/InstructorResources"; // New component
 
 const InstructorDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,6 +18,7 @@ const InstructorDashboard = () => {
   const [attendance, setAttendance] = useState([]);
   const [exams, setExams] = useState([]);
   const [certificates, setCertificates] = useState([]);
+  const [resources, setResources] = useState([]); // New state for resources
   const navigate = useNavigate();
 
   // Fetch all courses taught by the instructor
@@ -107,6 +109,23 @@ const InstructorDashboard = () => {
     }
   };
 
+  // Fetch all resources for a course
+  const fetchResources = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `https://sky-wings-server.vercel.app/api/instructor/courses/${courseId}/resources`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setResources(response.data);
+    } catch (error) {
+      console.error("Error fetching resources:", error);
+    }
+  };
+
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -124,19 +143,29 @@ const InstructorDashboard = () => {
     switch (activeLink) {
       case "courses":
         return (
-          <InstructorCourses courses={courses} fetchSessions={fetchSessions} />
+          <InstructorCourses 
+            courses={courses} 
+            fetchSessions={fetchSessions} 
+            fetchResources={fetchResources}
+          />
         );
       case "sessions":
-        return <InstructorSessions />;
+        return <InstructorSessions sessions={sessions} fetchAttendance={fetchAttendance} />;
       case "attendance":
         return <InstructorAttendance attendance={attendance} />;
       case "exams":
         return <InstructorExams exams={exams} />;
       case "certificates":
         return <InstructorCertificates certificates={certificates} />;
+      case "resources":
+        return <InstructorResources resources={resources} />;
       default:
         return (
-          <InstructorCourses courses={courses} fetchSessions={fetchSessions} />
+          <InstructorCourses 
+            courses={courses} 
+            fetchSessions={fetchSessions} 
+            fetchResources={fetchResources}
+          />
         );
     }
   };
@@ -167,6 +196,11 @@ const InstructorDashboard = () => {
       id: "certificates",
       label: "Certificates",
       icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    },
+    {
+      id: "resources",
+      label: "Resources",
+      icon: "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z",
     },
     {
       id: "logout",
