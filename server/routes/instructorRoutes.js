@@ -244,44 +244,60 @@ router.get("/attendance/:sessionId", async (req, res) => {
   }
 });
 
-// ✅ POST /instructor/courses/:id/resources - Add resources to a course
-router.post(
-  "/courses/:id/resources",
-  upload.single("file"),
-  async (req, res) => {
-    try {
-      const { title, description, resourceType, resourceCategory } = req.body;
+// ✅ GET /instructor/courses/resources?courseId=:id - Get all resources for a course (using query param)
+router.get("/courses/resources", async (req, res) => {
+  try {
+    const { courseId } = req.query; // Get courseId from query instead of params
 
-      // Ensure a file is uploaded
-      if (!req.file) {
-        return res.status(400).json({ message: "File upload is required" });
-      }
-
-      // Validate course existence before adding resource
-      const courseExists = await Course.findById(req.params.id);
-      if (!courseExists) {
-        return res.status(404).json({ message: "Course not found" });
-      }
-
-      const resource = new Resource({
-        title,
-        description,
-        fileUrl: req.file.filename, // Stores only the filename
-        uploadedBy: req.user._id,
-        course: req.params.id,
-        resourceType,
-        resourceCategory,
-      });
-
-      await resource.save();
-      res
-        .status(201)
-        .json({ message: "Resource added successfully", resource });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+    if (!courseId) {
+      return res.status(400).json({ message: "Course ID is required" });
     }
+
+    const courseExists = await Course.findById(courseId);
+    if (!courseExists) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    const resources = await Resource.find({ course: courseId });
+    res.status(200).json({ resources });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-);
+});
+
+// ✅ POST /instructor/courses/resources - Add resources to a course (course ID comes from form)
+router.post("/courses/resources", upload.single("file"), async (req, res) => {
+  try {
+    const { title, description, resourceType, resourceCategory, courseId } =
+      req.body;
+
+    // Ensure a file is uploaded
+    if (!req.file) {
+      return res.status(400).json({ message: "File upload is required" });
+    }
+
+    // Validate course existence before adding resource
+    const courseExists = await Course.findById(courseId);
+    if (!courseExists) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    const resource = new Resource({
+      title,
+      description,
+      fileUrl: req.file.filename, // Stores only the filename
+      uploadedBy: req.user._id,
+      course: courseId, // Using courseId from form instead of URL param
+      resourceType,
+      resourceCategory,
+    });
+
+    await resource.save();
+    res.status(201).json({ message: "Resource added successfully", resource });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // ✅ POST /instructor/courses/:id/attendance - Mark attendance for a session
 router.post("/courses/:id/attendance", async (req, res) => {
