@@ -16,7 +16,7 @@ const EnrollButton = ({ courseId }) => {
       }
 
       const response = await axios.post(
-        `https://sky-wings-server.vercel.app/course/${courseId}/enroll`,
+        `https://sky-wings-server.vercel.app/api/course/${courseId}/enroll`,
         {}, // Empty body, as the server expects data in headers
         {
           headers: {
