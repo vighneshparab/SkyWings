@@ -12,9 +12,23 @@ const InstructorResources = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    resourceType: "document",
-    resourceCategory: "lecture",
+    resourceType: "pdf",
+    resourceCategory: "safety",
   });
+
+  // Resource type and category options
+  const resourceTypes = [
+    { value: "video", label: "Video" },
+    { value: "pdf", label: "PDF Document" },
+    { value: "quiz", label: "Quiz" },
+    { value: "assignment", label: "Assignment" },
+  ];
+
+  const resourceCategories = [
+    { value: "safety", label: "Safety" },
+    { value: "hospitality", label: "Hospitality" },
+    { value: "grooming", label: "Grooming" },
+  ];
 
   // Fetch courses taught by the instructor
   useEffect(() => {
@@ -76,6 +90,42 @@ const InstructorResources = () => {
     }));
   };
 
+  const handleDownload = async (resourceId, fileUrl) => {
+    try {
+      // Increment download count
+      await axios.patch(
+        `https://sky-wings-server.vercel.app/api/instructor/resources/${resourceId}/increment-download`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      // Trigger download
+      const link = document.createElement("a");
+      link.href = fileUrl;
+      link.setAttribute("download", "");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Refresh resources to update download count
+      const response = await axios.get(
+        `https://sky-wings-server.vercel.app/api/instructor/courses/resources?courseId=${selectedCourse}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setResources(response.data.resources);
+    } catch (err) {
+      console.error("Download error:", err);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedCourse || !file) return;
@@ -116,8 +166,8 @@ const InstructorResources = () => {
       setFormData({
         title: "",
         description: "",
-        resourceType: "document",
-        resourceCategory: "lecture",
+        resourceType: "pdf",
+        resourceCategory: "safety",
       });
       setFile(null);
       e.target.reset();
@@ -134,10 +184,7 @@ const InstructorResources = () => {
 
       {/* Course Selection Dropdown */}
       <div className="space-y-2">
-        <label
-          htmlFor="course"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="course" className="block text-sm font-medium text-gray-700">
           Select Course
         </label>
         <select
@@ -169,10 +216,7 @@ const InstructorResources = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                   Title*
                 </label>
                 <input
@@ -187,16 +231,14 @@ const InstructorResources = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Description
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                  Description*
                 </label>
                 <input
                   type="text"
                   id="description"
                   name="description"
+                  required
                   value={formData.description}
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -206,10 +248,7 @@ const InstructorResources = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label
-                  htmlFor="resourceType"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="resourceType" className="block text-sm font-medium text-gray-700">
                   Resource Type*
                 </label>
                 <select
@@ -220,19 +259,16 @@ const InstructorResources = () => {
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 >
-                  <option value="document">Document</option>
-                  <option value="video">Video</option>
-                  <option value="audio">Audio</option>
-                  <option value="link">Link</option>
-                  <option value="other">Other</option>
+                  {resourceTypes.map((type) => (
+                    <option key={type.value} value={type.value}>
+                      {type.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div>
-                <label
-                  htmlFor="resourceCategory"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="resourceCategory" className="block text-sm font-medium text-gray-700">
                   Category*
                 </label>
                 <select
@@ -243,20 +279,17 @@ const InstructorResources = () => {
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 >
-                  <option value="lecture">Lecture Material</option>
-                  <option value="assignment">Assignment</option>
-                  <option value="reading">Reading</option>
-                  <option value="reference">Reference</option>
-                  <option value="solution">Solution</option>
+                  {resourceCategories.map((category) => (
+                    <option key={category.value} value={category.value}>
+                      {category.label}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
 
             <div>
-              <label
-                htmlFor="file"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="file" className="block text-sm font-medium text-gray-700">
                 File*
               </label>
               <input
@@ -289,43 +322,43 @@ const InstructorResources = () => {
           {isLoading ? (
             <p>Loading resources...</p>
           ) : resources.length === 0 ? (
-            <p className="text-gray-500">
-              No resources available for this course.
-            </p>
+            <p className="text-gray-500">No resources available for this course.</p>
           ) : (
             <div className="space-y-4">
               {resources.map((resource) => (
-                <div
-                  key={resource._id}
-                  className="border p-4 rounded-lg hover:bg-gray-50"
-                >
+                <div key={resource._id} className="border p-4 rounded-lg hover:bg-gray-50">
                   <div className="flex justify-between items-start">
                     <div>
                       <h4 className="font-medium text-lg">{resource.title}</h4>
                       <p className="text-gray-600">{resource.description}</p>
-                      <div className="mt-2 text-sm text-gray-500">
-                        <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2">
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
                           {resource.resourceType}
                         </span>
-                        <span className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded">
+                        <span className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
                           {resource.resourceCategory}
                         </span>
+                        <span className="inline-block bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
+                          Downloads: {resource.downloadCount}
+                        </span>
+                        {resource.uploadedBy && (
+                          <span className="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">
+                            Uploaded by: {resource.uploadedBy.name}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="flex space-x-2">
-                      <a
-                        href={`https://sky-wings-server.vercel.app/uploads/${resource.fileUrl}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={() => handleDownload(resource._id, resource.fileUrl)}
                         className="text-blue-600 hover:text-blue-800"
                       >
                         Download
-                      </a>
+                      </button>
                     </div>
                   </div>
                   <div className="mt-2 text-sm text-gray-500">
-                    Uploaded:{" "}
-                    {new Date(resource.createdAt).toLocaleDateString()}
+                    Uploaded: {new Date(resource.createdAt).toLocaleString()}
                   </div>
                 </div>
               ))}
