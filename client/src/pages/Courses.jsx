@@ -59,8 +59,13 @@ const Courses = () => {
                   className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300"
                 >
                   <img
-                    src="/uploads/1742379706696-pexels-starstra-30382519.jpg"
-                    alt="Uploaded Image"
+                    className="w-full h-48 object-cover md:w-64 md:h-full"
+                    src={
+                      course.image
+                        ? course.image
+                        : "/uploads/default-course.jpg"
+                    }
+                    alt="Course Image"
                   />
 
                   {/* Course Title */}
