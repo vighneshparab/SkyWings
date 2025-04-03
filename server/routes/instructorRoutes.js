@@ -244,10 +244,10 @@ router.get("/attendance/:sessionId", async (req, res) => {
   }
 });
 
-// ✅ GET /instructor/courses/resources?courseId=:id - Get all resources for a course (using query param)
+// ✅ GET /instructor/courses/resources?courseId=:id - Get all resources for a course
 router.get("/courses/resources", async (req, res) => {
   try {
-    const { courseId } = req.query; // Get courseId from query instead of params
+    const { courseId } = req.query;
 
     if (!courseId) {
       return res.status(400).json({ message: "Course ID is required" });
@@ -258,25 +258,38 @@ router.get("/courses/resources", async (req, res) => {
       return res.status(404).json({ message: "Course not found" });
     }
 
-    const resources = await Resource.find({ course: courseId });
+    const resources = await Resource.find({ course: courseId })
+      .populate("uploadedBy", "name email")
+      .sort({ createdAt: -1 });
+
     res.status(200).json({ resources });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// ✅ POST /instructor/courses/resources - Add resources to a course (course ID comes from form)
+// ✅ POST /instructor/courses/resources - Add resources to a course
 router.post("/courses/resources", upload.single("file"), async (req, res) => {
   try {
-    const { title, description, resourceType, resourceCategory, courseId } =
-      req.body;
+    const { title, description, resourceType, resourceCategory, courseId } = req.body;
 
-    // Ensure a file is uploaded
-    if (!req.file) {
-      return res.status(400).json({ message: "File upload is required" });
+    // Validate required fields
+    if (!req.file || !title || !description || !resourceType || !resourceCategory || !courseId) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Validate course existence before adding resource
+    // Validate resourceType and resourceCategory against enum values
+    const validResourceTypes = ["video", "pdf", "quiz", "assignment"];
+    const validCategories = ["safety", "hospitality", "grooming"];
+
+    if (!validResourceTypes.includes(resourceType)) {
+      return res.status(400).json({ message: "Invalid resource type" });
+    }
+
+    if (!validCategories.includes(resourceCategory)) {
+      return res.status(400).json({ message: "Invalid resource category" });
+    }
+
     const courseExists = await Course.findById(courseId);
     if (!courseExists) {
       return res.status(404).json({ message: "Course not found" });
@@ -285,15 +298,41 @@ router.post("/courses/resources", upload.single("file"), async (req, res) => {
     const resource = new Resource({
       title,
       description,
-      fileUrl: req.file.filename, // Stores only the filename
+      fileUrl: req.file.path, // Store full path or filename as per your config
       uploadedBy: req.user._id,
-      course: courseId, // Using courseId from form instead of URL param
+      course: courseId,
       resourceType,
-      resourceCategory,
+      resourceCategory
     });
 
     await resource.save();
-    res.status(201).json({ message: "Resource added successfully", resource });
+    
+    // Populate uploadedBy in the response
+    const populatedResource = await Resource.findById(resource._id).populate("uploadedBy", "name email");
+    
+    res.status(201).json({ 
+      message: "Resource added successfully", 
+      resource: populatedResource 
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// ✅ PATCH /instructor/resources/:id/increment-download - Increment download count
+router.patch("/resources/:id/increment-download", async (req, res) => {
+  try {
+    const resource = await Resource.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { downloadCount: 1 } },
+      { new: true }
+    ).populate("uploadedBy", "name email");
+
+    if (!resource) {
+      return res.status(404).json({ message: "Resource not found" });
+    }
+
+    res.status(200).json({ resource });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
