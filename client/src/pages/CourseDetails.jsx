@@ -61,8 +61,10 @@ const CourseDetails = () => {
           <div className="md:flex">
             <div className="md:shrink-0">
               <img
-                className="h-48 w-full object-cover md:h-full md:w-64"
-                src="/uploads/1742379706696-pexels-starstra-30382519.jpg"
+                className="w-full h-48 object-cover md:w-64 md:h-full"
+                src={
+                  course.image ? course.image : "/uploads/default-course.jpg"
+                }
                 alt="Course Image"
               />
             </div>
