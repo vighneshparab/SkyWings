@@ -143,14 +143,19 @@ const InstructorDashboard = () => {
     switch (activeLink) {
       case "courses":
         return (
-          <InstructorCourses 
-            courses={courses} 
-            fetchSessions={fetchSessions} 
+          <InstructorCourses
+            courses={courses}
+            fetchSessions={fetchSessions}
             fetchResources={fetchResources}
           />
         );
       case "sessions":
-        return <InstructorSessions sessions={sessions} fetchAttendance={fetchAttendance} />;
+        return (
+          <InstructorSessions
+            sessions={sessions}
+            fetchAttendance={fetchAttendance}
+          />
+        );
       case "attendance":
         return <InstructorAttendance attendance={attendance} />;
       case "exams":
@@ -161,9 +166,9 @@ const InstructorDashboard = () => {
         return <InstructorResources resources={resources} />;
       default:
         return (
-          <InstructorCourses 
-            courses={courses} 
-            fetchSessions={fetchSessions} 
+          <InstructorCourses
+            courses={courses}
+            fetchSessions={fetchSessions}
             fetchResources={fetchResources}
           />
         );
