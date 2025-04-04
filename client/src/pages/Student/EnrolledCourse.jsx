@@ -53,24 +53,26 @@ const EnrolledCourse = () => {
                 key={enrollment._id}
                 className="border p-4 rounded-lg hover:shadow-lg transition-shadow"
               >
-                {enrollment.course.image && (
-                 <img
-                className="w-full h-48 object-cover md:w-64 md:h-full"
-                src={
-                  enrollment.course.image  ? course.image : "/uploads/default-course.jpg"
-                }
-                alt="Course Image"
-              />
+                {enrollment.course?.image && (
+                  <img
+                    className="w-full h-48 object-cover md:w-64 md:h-full"
+                    src={
+                      enrollment.course.image
+                        ? enrollment.course.image
+                        : "/uploads/default-course.jpg"
+                    }
+                    alt="Course Image"
+                  />
                 )}
                 <h3 className="text-lg font-semibold">
-                  {enrollment.course.title}
+                  {enrollment.course?.title}
                 </h3>
                 <p className="text-gray-600 mt-2">
-                  {enrollment.course.description}
+                  {enrollment.course?.description}
                 </p>
                 <div className="mt-4">
                   <a
-                    href={`/course/${enrollment.course._id}`}
+                    href={`/course/${enrollment.course?._id}`}
                     className="text-blue-600 hover:underline"
                   >
                     View Course
