@@ -31,19 +31,19 @@ const EnrolledCourse = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center mt-8">Loading...</div>;
+    return <div className="text-center mt-8 text-lg font-semibold">Loading...</div>;
   }
 
   if (error) {
-    return <div className="text-center mt-8 text-red-500">{error}</div>;
+    return <div className="text-center mt-8 text-red-500 text-lg">{error}</div>;
   }
 
   return (
-    <div className="max-w-3xl w-full">
+    <div className="max-w-6xl mx-auto p-4">
       {/* Enrolled Courses Section */}
-      <section className="bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-          Enrolled Courses
+      <section className="bg-white p-6 md:p-8 rounded-lg shadow-md">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          My Enrolled Courses
         </h2>
 
         {enrolledCourses.length > 0 ? (
@@ -51,38 +51,43 @@ const EnrolledCourse = () => {
             {enrolledCourses.map((enrollment) => (
               <div
                 key={enrollment._id}
-                className="border p-4 rounded-lg hover:shadow-lg transition-shadow"
+                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
               >
-                {enrollment.course?.image && (
-                  <img
-                    className="w-full h-48 object-cover md:w-64 md:h-full"
-                    src={
-                      enrollment.course.image
-                        ? enrollment.course.image
-                        : "/uploads/default-course.jpg"
-                    }
-                    alt="Course Image"
-                  />
-                )}
-                <h3 className="text-lg font-semibold">
-                  {enrollment.course?.title}
-                </h3>
-                <p className="text-gray-600 mt-2">
-                  {enrollment.course?.description}
-                </p>
-                <div className="mt-4">
-                  <a
-                    href={`/course/${enrollment.course?._id}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    View Course
-                  </a>
+                {/* Course Image */}
+                <img
+                  className="w-full h-52 object-cover"
+                  src={
+                    enrollment.course?.image
+                      ? enrollment.course.image
+                      : "/uploads/default-course.jpg"
+                  }
+                  alt={enrollment.course?.title || "Course Image"}
+                />
+
+                {/* Course Details */}
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {enrollment.course?.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+                    {enrollment.course?.description}
+                  </p>
+
+                  {/* View Course Button */}
+                  <div className="mt-4">
+                    <a
+                      href={`/course/${enrollment.course?._id}`}
+                      className="inline-block px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-all rounded-md text-center w-full"
+                    >
+                      View Course
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-gray-600">
+          <p className="text-center text-gray-600 text-lg">
             You are not enrolled in any courses yet.
           </p>
         )}
