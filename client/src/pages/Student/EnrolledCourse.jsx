@@ -54,13 +54,15 @@ const EnrolledCourse = () => {
                 className="border p-4 rounded-lg hover:shadow-lg transition-shadow"
               >
                 {enrollment.course.image && (
-                 <img
-                className="w-full h-48 object-cover md:w-64 md:h-full"
-                src={
-                  enrollment.course.image  ? course.image : "/uploads/default-course.jpg"
-                }
-                alt="Course Image"
-              />
+                  <img
+                    className="w-full h-48 object-cover md:w-64 md:h-full"
+                    src={
+                      enrollment.course.image.startsWith("http")
+                        ? enrollment.course.image
+                        : `https://sky-wings-server.vercel.app/uploads/${enrollment.course.image}`
+                    }
+                    alt={enrollment.course.title}
+                  />
                 )}
                 <h3 className="text-lg font-semibold">
                   {enrollment.course.title}
