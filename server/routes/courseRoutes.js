@@ -28,13 +28,13 @@ const transporter = nodemailer.createTransport({
 });
 
 // Test the transporter
-transporter.verify(function (error, success) {
-  if (error) {
-    console.error("Error verifying transporter:", error);
-  } else {
-    console.log("Email transporter is ready");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.error("Error verifying transporter:", error);
+//   } else {
+//     console.log("Email transporter is ready");
+//   }
+// });
 
 // ✅ GET /student/courses - Fetch all active courses
 router.get("/", async (req, res) => {
