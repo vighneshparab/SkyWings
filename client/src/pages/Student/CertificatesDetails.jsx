@@ -27,37 +27,32 @@ const CertificateDetails = () => {
           </linearGradient>
           <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#dc2626" />
-            <stop offset="50%" stopColor="#ef4444" />
-            <stop offset="100%" stopColor="#b91c1c" />
+            <stop offset="100%" stopColor="#f59e0b" />
           </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge> 
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
+          <filter id="dropShadow">
+            <feDropShadow dx="2" dy="4" stdDeviation="3" floodColor="#000" floodOpacity="0.3"/>
           </filter>
         </defs>
-        <circle cx="150" cy="75" r="72" fill="url(#skyGradient)" filter="url(#glow)" />
-        <circle cx="150" cy="75" r="68" fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.3" />
+        <circle cx="150" cy="75" r="70" fill="url(#skyGradient)" filter="url(#dropShadow)" />
+        <circle cx="150" cy="75" r="65" fill="white" fillOpacity="0.1" />
         <path
-          d="M150 35 C115 60, 65 65, 45 35 C75 75, 120 68, 150 35"
+          d="M150 40 C120 60, 70 65, 50 40 C80 70, 120 65, 150 40"
           fill="url(#wingGradient)"
-          filter="url(#glow)"
+          filter="url(#dropShadow)"
         />
         <path
-          d="M150 35 C185 60, 235 65, 255 35 C225 75, 180 68, 150 35"
+          d="M150 40 C180 60, 230 65, 250 40 C220 70, 180 65, 150 40"
           fill="url(#wingGradient)"
-          filter="url(#glow)"
+          filter="url(#dropShadow)"
         />
-        <path d="M150 42 L146 85 L154 85 Z" fill="#1e3a8a" />
-        <ellipse cx="150" cy="85" rx="18" ry="6" fill="#1e3a8a" />
-        <path id="textPath" d="M150,145 A70,70 0 1,1 150.1,145" fill="none" />
+        <path d="M150 45 L145 80 L155 80 Z" fill="#1e3a8a" />
+        <ellipse cx="150" cy="80" rx="15" ry="5" fill="#1e3a8a" />
+        <path id="textPath" d="M150,140 A65,65 0 1,1 150.1,140" fill="none" />
         <text
           fill="white"
-          fontFamily="Georgia, serif"
+          fontFamily="Arial, sans-serif"
           fontWeight="bold"
-          fontSize="18"
+          fontSize="16"
           textAnchor="middle"
         >
           <textPath href="#textPath" startOffset="50%">
@@ -66,22 +61,20 @@ const CertificateDetails = () => {
         </text>
         <text
           x="150"
-          y="120"
+          y="115"
           fill="white"
-          fontFamily="Georgia, serif"
-          fontSize="10"
+          fontFamily="Arial, sans-serif"
+          fontSize="8"
           textAnchor="middle"
-          fontWeight="600"
         >
           AIR HOSTESS TRAINING INSTITUTE
         </text>
         <path
-          d="M70 95 Q 150 105, 230 95"
+          d="M70 90 Q 150 100, 230 90"
           stroke="white"
           strokeWidth="2"
           strokeDasharray="3,3"
           fill="none"
-          opacity="0.7"
         />
       </svg>
     ),
@@ -91,36 +84,29 @@ const CertificateDetails = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 300 100"
-        className="h-16 w-52"
+        className="h-16 w-56"
       >
         <defs>
-          <linearGradient id="inkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="signatureGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#1e40af" />
-            <stop offset="100%" stopColor="#1e3a8a" />
+            <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
         </defs>
         <rect width="300" height="100" fill="transparent" />
         <path
-          d="M25 65 C35 35, 45 30, 55 35 C65 40, 70 55, 75 65 C80 55, 85 45, 95 40 C105 35, 115 45, 125 55 C135 60, 145 65, 155 60 C165 55, 175 45, 185 35 C195 25, 205 20, 215 25 C225 30, 235 40, 240 55 C245 65, 250 75, 255 65"
+          d="M30 70 C40 40, 50 35, 60 40 C70 45, 75 60, 80 70 C85 60, 90 50, 100 45 C110 40, 120 50, 130 60 C140 65, 150 70, 160 65 C170 60, 180 50, 190 40 C200 30, 210 25, 220 30 C230 35, 240 45, 245 60 C250 70, 255 80, 260 70"
           fill="none"
-          stroke="url(#inkGradient)"
+          stroke="url(#signatureGradient)"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="95" cy="25" r="2.5" fill="url(#inkGradient)" />
+        <circle cx="100" cy="30" r="2" fill="#1e40af" />
         <path
-          d="M25 75 C75 73, 125 77, 255 75"
+          d="M30 80 C80 78, 130 82, 260 80"
           fill="none"
-          stroke="url(#inkGradient)"
+          stroke="url(#signatureGradient)"
           strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M140 30 C150 25, 160 28, 170 35 C175 40, 180 50, 185 60"
-          fill="none"
-          stroke="url(#inkGradient)"
-          strokeWidth="2"
           strokeLinecap="round"
         />
       </svg>
@@ -134,175 +120,112 @@ const CertificateDetails = () => {
         <defs>
           <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#fbbf24" />
-            <stop offset="30%" stopColor="#f59e0b" />
-            <stop offset="70%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#92400e" />
+            <stop offset="50%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#d97706" />
           </linearGradient>
-          <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <radialGradient id="sealBackground" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#1e40af" />
-            <stop offset="50%" stopColor="#3b82f6" />
             <stop offset="100%" stopColor="#1e3a8a" />
-          </linearGradient>
-          <pattern
-            id="elegantPattern"
-            width="12"
-            height="12"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="6" cy="6" r="1" fill="url(#goldGradient)" opacity="0.3" />
-            <path
-              d="M0 6 L12 6 M6 0 L6 12"
-              stroke="url(#goldGradient)"
-              strokeWidth="0.3"
-              strokeOpacity="0.2"
-            />
-          </pattern>
-          <filter id="emboss">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="3" dy="3" result="offset"/>
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.2"/>
-            </feComponentTransfer>
+          </radialGradient>
+          <filter id="goldGlow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge> 
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
         </defs>
-        
-        {/* Outer decorative ring */}
         <circle
           cx="100"
           cy="100"
-          r="98"
+          r="95"
           fill="none"
           stroke="url(#goldGradient)"
-          strokeWidth="4"
+          strokeWidth="6"
+          filter="url(#goldGlow)"
         />
-        
-        {/* Main seal background */}
-        <circle cx="100" cy="100" r="92" fill="url(#blueGradient)" />
-        <circle cx="100" cy="100" r="92" fill="url(#elegantPattern)" />
-        
-        {/* Inner decorative rings */}
+        <circle cx="100" cy="100" r="90" fill="url(#sealBackground)" />
         <circle
           cx="100"
           cy="100"
-          r="88"
+          r="85"
           fill="none"
           stroke="url(#goldGradient)"
-          strokeWidth="1.5"
+          strokeWidth="2"
         />
         <circle
           cx="100"
           cy="100"
-          r="82"
+          r="78"
           fill="none"
           stroke="url(#goldGradient)"
-          strokeWidth="0.8"
-          strokeDasharray="3,2"
+          strokeWidth="1"
+          strokeDasharray="5,2"
         />
         
-        {/* Corner decorative elements */}
-        <g fill="url(#goldGradient)">
-          <path d="M100 12 L104 22 L114 22 L106 28 L110 38 L100 32 L90 38 L94 28 L86 22 L96 22 Z" />
-          <path d="M100 188 L104 178 L114 178 L106 172 L110 162 L100 168 L90 162 L94 172 L86 178 L96 178 Z" />
-          <path d="M12 100 L22 96 L22 86 L28 94 L38 90 L32 100 L38 110 L28 106 L22 114 L22 104 Z" />
-          <path d="M188 100 L178 96 L178 86 L172 94 L162 90 L168 100 L162 110 L172 106 L178 114 L178 104 Z" />
+        {/* Enhanced decorative stars */}
+        <g fill="url(#goldGradient)" filter="url(#goldGlow)">
+          <path d="M100 20 L102 25 L107 25 L103 29 L105 34 L100 31 L95 34 L97 29 L93 25 L98 25 Z" />
+          <path d="M100 180 L102 175 L107 175 L103 171 L105 166 L100 169 L95 166 L97 171 L93 175 L98 175 Z" />
+          <path d="M20 100 L25 98 L25 93 L29 97 L34 95 L31 100 L34 105 L29 103 L25 107 L25 102 Z" />
+          <path d="M180 100 L175 98 L175 93 L171 97 L166 95 L169 100 L166 105 L171 103 L175 107 L175 102 Z" />
         </g>
         
-        {/* Central emblem - enhanced wings */}
+        {/* Enhanced wings */}
         <path
-          d="M100 55 C75 75, 45 78, 25 60 C50 85, 85 80, 100 55"
+          d="M100 65 C80 75, 50 78, 40 70 C60 85, 85 80, 100 65"
           fill="url(#goldGradient)"
-          filter="url(#emboss)"
+          filter="url(#goldGlow)"
         />
         <path
-          d="M100 55 C125 75, 155 78, 175 60 C150 85, 115 80, 100 55"
+          d="M100 65 C120 75, 150 78, 160 70 C140 85, 115 80, 100 65"
           fill="url(#goldGradient)"
-          filter="url(#emboss)"
+          filter="url(#goldGlow)"
         />
-        <path d="M100 62 L96 95 L104 95 Z" fill="url(#goldGradient)" />
+        <path d="M100 70 L97 95 L103 95 Z" fill="url(#goldGradient)" />
         <ellipse cx="100" cy="95" rx="12" ry="4" fill="url(#goldGradient)" />
         
-        {/* Text around the seal */}
-        <path id="topTextPath" d="M100,25 A75,75 0 0,1 175,100" fill="none" />
+        {/* Enhanced text paths */}
+        <path id="topTextPath" d="M100,35 A65,65 0 0,1 165,100" fill="none" />
         <text
           fill="url(#goldGradient)"
-          fontFamily="Georgia, serif"
+          fontFamily="serif"
           fontWeight="bold"
           fontSize="14"
-          letterSpacing="1px"
+          filter="url(#goldGlow)"
         >
           <textPath href="#topTextPath" startOffset="20%">
             SKYWINGS
           </textPath>
         </text>
-        
         <path
           id="bottomTextPath"
-          d="M100,175 A75,75 0 0,0 175,100"
+          d="M100,165 A65,65 0 0,0 165,100"
           fill="none"
         />
         <text
           fill="url(#goldGradient)"
-          fontFamily="Georgia, serif"
+          fontFamily="serif"
           fontWeight="bold"
           fontSize="14"
-          letterSpacing="1px"
+          filter="url(#goldGlow)"
         >
           <textPath href="#bottomTextPath" startOffset="5%">
             INSTITUTE
           </textPath>
         </text>
-        
-        <path id="leftTextPath" d="M25,100 A75,75 0 0,0 100,175" fill="none" />
-        <text
-          fill="url(#goldGradient)"
-          fontFamily="Georgia, serif"
-          fontWeight="bold"
-          fontSize="11"
-          letterSpacing="0.5px"
-        >
-          <textPath href="#leftTextPath" startOffset="10%">
-            AIR HOSTESS
-          </textPath>
-        </text>
-        
-        <path id="rightTextPath" d="M25,100 A75,75 0 0,1 100,25" fill="none" />
-        <text
-          fill="url(#goldGradient)"
-          fontFamily="Georgia, serif"
-          fontWeight="bold"
-          fontSize="11"
-          letterSpacing="0.5px"
-        >
-          <textPath href="#rightTextPath" startOffset="10%">
-            TRAINING
-          </textPath>
-        </text>
-        
         <text
           x="100"
-          y="118"
+          y="115"
           fill="url(#goldGradient)"
-          fontFamily="Georgia, serif"
+          fontFamily="serif"
           fontSize="12"
           fontWeight="bold"
           textAnchor="middle"
+          filter="url(#goldGlow)"
         >
           EST. 2025
         </text>
-        
-        {/* Decorative flourishes */}
-        <path
-          d="M100 135 Q 125 140, 150 135"
-          stroke="url(#goldGradient)"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M100 135 Q 75 140, 50 135"
-          stroke="url(#goldGradient)"
-          strokeWidth="1.5"
-          fill="none"
-        />
       </svg>
     ),
   };
@@ -341,7 +264,7 @@ const CertificateDetails = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600"></div>
       </div>
     );
   }
@@ -349,73 +272,69 @@ const CertificateDetails = () => {
   if (error) {
     return (
       <div className="text-center mt-8 text-red-600 p-6 bg-red-50 rounded-xl border border-red-200">
-        <div className="text-xl font-semibold mb-2">Error Loading Certificate</div>
-        <div className="text-red-500">{error}</div>
+        <div className="text-lg font-semibold mb-2">Error Loading Certificate</div>
+        <div className="text-sm">{error}</div>
       </div>
     );
   }
 
   return (
-    <div
-      className={`max-w-5xl mx-auto my-8 px-4 ${printMode ? "print-mode" : ""}`}
-    >
-      {/* Control buttons - hidden when printing */}
-      <div
-        className={`mb-8 flex justify-end gap-4 ${printMode ? "hidden" : ""}`}
-      >
+    <div className={`max-w-6xl mx-auto my-8 px-4 ${printMode ? "print-mode" : ""}`}>
+      {/* Enhanced Control buttons */}
+      <div className={`mb-8 flex justify-end gap-4 ${printMode ? "hidden" : ""}`}>
         <button
           onClick={handlePrint}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold"
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold flex items-center gap-2"
         >
-          🖨️ Print Certificate
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Print Certificate
         </button>
         <button
           onClick={() => window.history.back()}
-          className="px-6 py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 rounded-lg hover:from-gray-200 hover:to-gray-300 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold"
+          className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200 shadow-md hover:shadow-lg font-semibold flex items-center gap-2"
         >
-          ← Back
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back
         </button>
       </div>
 
-      {/* Certificate Document */}
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden relative">
-        {/* Elegant border frame */}
+      {/* Enhanced Certificate Document */}
+      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden relative">
+        {/* Elegant border design */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50"></div>
-        <div className="absolute inset-4 border-4 border-double border-blue-200 rounded-lg"></div>
+        <div className="absolute inset-4 border-4 border-double border-blue-200 rounded-xl"></div>
         <div className="absolute inset-6 border border-blue-100 rounded-lg"></div>
         
         {/* Decorative corner elements */}
-        <div className="absolute top-6 left-6 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10"></div>
-        <div className="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10"></div>
-        <div className="absolute bottom-6 left-6 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10"></div>
-        <div className="absolute bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10"></div>
+        <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10"></div>
+        <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-bl from-blue-600 to-blue-800 rounded-full opacity-10"></div>
+        <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-blue-600 to-blue-800 rounded-full opacity-10"></div>
+        <div className="absolute bottom-4 right-4 w-16 h-16 bg-gradient-to-tl from-blue-600 to-blue-800 rounded-full opacity-10"></div>
 
         {/* Content Container */}
         <div className="relative z-10 p-12">
-          {/* Header with Logo */}
-          <div className="flex justify-between items-start mb-8">
-            <div className="flex items-center space-x-4">
+          {/* Enhanced Header */}
+          <div className="flex justify-between items-start mb-10">
+            <div className="flex items-center gap-4">
               {instituteInfo.logo}
               <div>
-                <h1 className="text-2xl font-bold text-blue-900 tracking-wide">
+                <h1 className="text-4xl font-serif font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">
                   {instituteInfo.name}
                 </h1>
-                <p className="text-sm text-blue-600 font-medium">
+                <p className="text-sm text-gray-600 italic font-medium mt-1">
                   {instituteInfo.tagline}
                 </p>
               </div>
             </div>
-            <div className="text-right bg-blue-50 p-4 rounded-lg border border-blue-200">
-              <p className="text-sm font-semibold text-blue-800 mb-1">
-                Certificate ID
-              </p>
-              <p className="text-xs text-blue-600 font-mono bg-white px-2 py-1 rounded">
-                {certificate.certificateId}
-              </p>
-              <p className="text-sm font-semibold text-blue-800 mt-2 mb-1">
-                Issue Date
-              </p>
-              <p className="text-xs text-blue-600">
+            <div className="text-right bg-blue-50 p-4 rounded-lg border border-blue-100">
+              <p className="text-xs text-blue-700 font-semibold mb-1">Certificate ID</p>
+              <p className="text-sm font-mono text-blue-900 mb-2">{certificate.certificateId}</p>
+              <p className="text-xs text-blue-700 font-semibold mb-1">Issue Date</p>
+              <p className="text-sm text-blue-900 font-medium">
                 {new Date(certificate.issueDate).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
@@ -425,119 +344,110 @@ const CertificateDetails = () => {
             </div>
           </div>
 
-          {/* Certificate Title */}
-          <div className="text-center mb-10">
+          {/* Enhanced Certificate Title */}
+          <div className="text-center mb-12">
             <div className="inline-block">
-              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-600 tracking-wider mb-2">
-                CERTIFICATE
+              <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800 bg-clip-text text-transparent uppercase tracking-wider mb-4">
+                Certificate of {certificate.certificateType || "Completion"}
               </h2>
-              <h3 className="text-xl font-semibold text-gray-700 tracking-widest">
-                OF {certificate.certificateType?.toUpperCase() || "COMPLETION"}
-              </h3>
-              <div className="flex justify-center mt-4">
-                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
+              <div className="flex justify-center items-center gap-4">
+                <div className="h-1 w-20 bg-gradient-to-r from-transparent to-blue-600"></div>
+                <div className="h-2 w-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full"></div>
+                <div className="h-1 w-20 bg-gradient-to-l from-transparent to-blue-600"></div>
               </div>
             </div>
           </div>
 
-          {/* Award Text */}
-          <div className="text-center mb-10">
-            <p className="text-lg text-gray-600 mb-6 font-medium">
+          {/* Enhanced Award Text */}
+          <div className="text-center mb-12">
+            <p className="text-xl text-gray-700 mb-6 font-serif">
               This is to certify that
             </p>
-            
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-2 border-blue-200 mb-6">
-              <h3 className="text-4xl font-bold text-blue-900 font-serif tracking-wide">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200 mb-6">
+              <h3 className="text-4xl font-serif font-bold text-blue-900 mb-2">
                 {certificate.studentName}
               </h3>
+              <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
             </div>
-            
-            <p className="text-lg text-gray-600 mb-6 font-medium">
-              has successfully completed the comprehensive training program
+            <p className="text-xl text-gray-700 mb-4 font-serif">
+              has successfully completed the course
             </p>
-            
-            <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-lg border border-gray-200 mb-6">
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200 mb-6">
               <h4 className="text-2xl font-bold text-blue-800 mb-3 font-serif">
                 {certificate.courseTitle}
               </h4>
-              <p className="text-base text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base text-gray-700 italic max-w-3xl mx-auto leading-relaxed">
                 {certificate.courseDescription}
               </p>
             </div>
-            
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 inline-block">
-              <p className="text-sm text-gray-700 font-medium">
-                <span className="text-yellow-700 font-semibold">Validity Period:</span> {certificate.validityPeriod}
-              </p>
-            </div>
           </div>
 
-          {/* Student Information */}
+          {/* Enhanced Additional Details */}
           <div className="text-center mb-12">
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 inline-block">
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold text-gray-800">Student Email:</span>{" "}
-                <span className="font-mono text-blue-600">{certificate.studentEmail}</span>
-              </p>
+            <div className="flex justify-center gap-8 flex-wrap">
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <p className="text-sm text-blue-700 font-semibold mb-1">Validity Period</p>
+                <p className="text-base font-medium text-blue-900">{certificate.validityPeriod}</p>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <p className="text-sm text-blue-700 font-semibold mb-1">Student Email</p>
+                <p className="text-base font-medium text-blue-900">{certificate.studentEmail}</p>
+              </div>
             </div>
           </div>
 
-          {/* Signatures Section */}
-          <div className="flex justify-between items-end mt-16 pt-8 border-t border-gray-200">
-            <div className="text-center flex-1">
-              <div className="h-16 w-52 mx-auto mb-4">
+          {/* Enhanced Signatures Section */}
+          <div className="flex justify-between items-end mt-16 pt-8">
+            <div className="text-center">
+              <div className="h-16 w-56 mx-auto mb-4">
                 {instituteInfo.signature}
               </div>
-              <div className="border-t-2 border-blue-600 pt-2 mx-auto w-48">
-                <p className="text-sm font-bold text-blue-900">Dr. Sarah Johnson</p>
-                <p className="text-xs text-gray-600 font-semibold">Program Director</p>
+              <div className="border-t-2 border-blue-300 pt-3 w-48 mx-auto">
+                <p className="text-sm font-bold text-blue-900 mb-1">Dr. Sarah Johnson</p>
+                <p className="text-xs text-blue-700 font-semibold">Program Director</p>
               </div>
             </div>
 
-            <div className="flex flex-col items-center mx-8">
-              <div className="mb-4">
+            <div className="flex flex-col items-center">
+              <div className="h-24 w-24 mb-4">
                 {instituteInfo.seal}
               </div>
-              <p className="text-xs text-gray-500 font-medium">Official Seal</p>
+              <p className="text-xs text-blue-700 font-semibold">Official Seal</p>
             </div>
 
-            <div className="text-center flex-1">
-              <div className="h-16 w-52 mx-auto mb-4">
+            <div className="text-center">
+              <div className="h-16 w-56 mx-auto mb-4">
                 {instituteInfo.signature}
               </div>
-              <div className="border-t-2 border-blue-600 pt-2 mx-auto w-48">
-                <p className="text-sm font-bold text-blue-900">Mark Thompson</p>
-                <p className="text-xs text-gray-600 font-semibold">Registrar</p>
+              <div className="border-t-2 border-blue-300 pt-3 w-48 mx-auto">
+                <p className="text-sm font-bold text-blue-900 mb-1">Prof. Michael Chen</p>
+                <p className="text-xs text-blue-700 font-semibold">Registrar</p>
               </div>
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="text-center mt-12 pt-8 border-t border-gray-200">
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-              <p className="text-sm text-blue-800 font-semibold mb-2">
-                {instituteInfo.name} - {instituteInfo.address}
-              </p>
-              <p className="text-sm text-blue-600 mb-2">
-                Website: {instituteInfo.website}
-              </p>
-              <p className="text-xs text-gray-600">
-                🔒 Verify this certificate at {instituteInfo.website}/verify
+          {/* Enhanced Footer */}
+          <div className="text-center mt-12 pt-8 border-t border-blue-200">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
+              <p className="text-sm text-blue-800 font-semibold mb-2">{instituteInfo.address}</p>
+              <p className="text-sm text-blue-700 mb-3">{instituteInfo.website}</p>
+              <p className="text-xs text-blue-600 bg-blue-100 px-4 py-2 rounded-full inline-block">
+                Verify this certificate at {instituteInfo.website}/verify
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Print Styles */}
+      {/* Enhanced Print Styles */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
           @media print {
             body { 
-              background-color: white !important;
-              -webkit-print-color-adjust: exact;
-              print-color-adjust: exact;
+              background-color: white; 
+              font-size: 12pt;
+              line-height: 1.4;
             }
             .print-mode { 
               padding: 0; 
@@ -545,13 +455,19 @@ const CertificateDetails = () => {
               max-width: none;
             }
             @page { 
-              size: A4 portrait; 
+              size: landscape A4; 
               margin: 0.5cm; 
             }
             .shadow-2xl,
             .shadow-xl,
-            .shadow-lg {
+            .shadow-lg,
+            .shadow-md {
               box-shadow: none !important;
+            }
+            .rounded-2xl,
+            .rounded-xl,
+            .rounded-lg {
+              border-radius: 0 !important;
             }
           }
         `,
